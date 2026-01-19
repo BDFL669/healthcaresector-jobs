@@ -14,8 +14,8 @@
     <div class="logo">MedJobs Kenya</div>
     <ul class="nav-links">
       <li><a href="#">Home</a></li>
-      <li><a href="#job-listing-title">Jobs</a></li>
-      <li><a href="#">About</a></li>
+      <li><a href="#job-filters">Jobs</a></li>
+      <li><a href="#about">About</a></li>
     </ul>
   </nav>
 
@@ -36,7 +36,7 @@
     </div>
   </section>
   <!-- Search & Filter Section -->
-<section class="job-filters">
+<section class="job-filters" id="job-filters">
   <input type="text" id="searchInput" placeholder="Search job title or company">
 
   <select id="locationFilter">
@@ -90,6 +90,47 @@
 {% else %}
     <p>No jobs found.</p>
 {% endif %}
+
+<section id="about" class="about-section">
+  <div class="about-container">
+    <h2>About MedJobs Kenya</h2>
+
+    <p class="about-intro">
+      MedJobs Kenya is a dedicated platform connecting healthcare professionals
+      with verified medical job opportunities across Kenya. Our mission is to
+      make healthcare recruitment transparent, accessible, and reliable.
+    </p>
+
+    <div class="about-cards">
+      <div class="about-card">
+        <h3>Our Mission</h3>
+        <p>
+          To bridge the gap between healthcare employers and qualified
+          professionals by providing accurate, up-to-date, and trustworthy job
+          listings.
+        </p>
+      </div>
+
+      <div class="about-card">
+        <h3>What We Offer</h3>
+        <p>
+          Curated job listings from hospitals, clinics, NGOs, and research
+          institutions, covering doctors, nurses, allied health professionals,
+          and support staff.
+        </p>
+      </div>
+
+      <div class="about-card">
+        <h3>Why Choose Us</h3>
+        <p>
+          We prioritize verified opportunities, clear job details, and an
+          intuitive browsing experience designed specifically for the Kenyan
+          medical sector.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
 
 <script>
   const searchInput = document.getElementById("searchInput");

@@ -235,3 +235,76 @@ h1 {
   outline: none;
   border-color: #0f766e;
 }
+
+/* About Section */
+.about-section {
+  padding: 80px 60px;
+  background: linear-gradient(
+      rgba(15, 118, 110, 0.9),
+      rgba(15, 118, 110, 0.9)
+    ),
+    url("https://images.unsplash.com/photo-1580281657527-47c0b4b7a0a6")
+      center/cover no-repeat;
+  color: white;
+}
+
+.about-container {
+  max-width: 1100px;
+  margin: auto;
+  text-align: center;
+}
+
+.about-container h2 {
+  font-size: 2.6rem;
+  margin-bottom: 20px;
+}
+
+.about-intro {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: 50px;
+  opacity: 0.95;
+}
+
+/* Cards */
+.about-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+}
+
+.about-card {
+  background-color: rgba(255, 255, 255, 0.12);
+  padding: 30px 25px;
+  border-radius: 14px;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.about-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+}
+
+.about-card h3 {
+  font-size: 1.4rem;
+  margin-bottom: 12px;
+}
+
+.about-card p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  opacity: 0.95;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .about-section {
+    padding: 60px 25px;
+  }
+
+  .about-container h2 {
+    font-size: 2.1rem;
+  }
+}
