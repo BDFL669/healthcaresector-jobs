@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jobs in Kenya Medical Sector</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+    <nav class="navbar">
+    <div class="logo">MedJobs Kenya</div>
+    <ul class="nav-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#job-listing-title">Jobs</a></li>
+      <li><a href="#">Employers</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#" class="btn-nav">Post a Job</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Medical Jobs Across Kenya</h1>
+      <p>
+        Welcome to the Jobs in Kenya Medical Sector page.
+        Discover verified job opportunities in hospitals, clinics,
+        NGOs, and healthcare institutions across Kenya.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="#job-listing-title" class="btn-primary">Browse Jobs</a>
+        <a href="#" class="btn-secondary">For Employers</a>
+      </div>
+    </div>
+  </section>
+
+    <h1 id="job-listing-title">Job Listings</h1>
+
+{% if jobs and jobs|length > 0 %}
+    <div class="job-cards">
+        {% for job in jobs %}
+            <div class="job-card">
+                <h2 class="job-title">{{ job.title }}</h2>
+                <p class="company">{{ job.company }}</p>
+                
+                <div class="job-info">
+                    <span class="location">📍 {{ job.location }}</span>
+                    <span class="job-type">💼 {{ job.job_type }}</span>
+                    <span class="experience">🧰 {{ job.experience }}</span>
+                    <span class="qualification">🎓 {{ job.qualification }}</span>
+                    <span class="industry">🏭 {{ job.industry }}</span>
+                    <span class="deadline">⏰ {{ job.deadline }}</span>
+                </div>
+
+                <div class="job-links">
+                    {% if job.application_link != "NA" %}
+                        <a href="{{ job.application_link }}" target="_blank" class="apply-btn">Apply</a>
+                    {% elif job.url %}
+                        <a href="{{ job.url }}" target="_blank" class="apply-btn">View Job</a>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <p>No jobs found.</p>
+{% endif %}
+
+
+</body>
+</html>
