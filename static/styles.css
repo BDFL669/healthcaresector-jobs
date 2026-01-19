@@ -6,6 +6,13 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
+#job-listing-title {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 2rem;
+    color: #0e0101;
+    text-align: center;
+}
 /* Navbar */
 .navbar {
   position: fixed;
@@ -202,4 +209,29 @@ h1 {
 
 .apply-btn:hover {
     background-color: #2980b9;
+}
+
+.job-filters {
+  display: flex;
+  gap: 15px;
+  padding: 20px 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  background-color: #f8f9fa;
+  margin-bottom: 20px;
+}
+
+.job-filters input,
+.job-filters select {
+  padding: 10px 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 0.95rem;
+  min-width: 220px;
+}
+
+.job-filters input:focus,
+.job-filters select:focus {
+  outline: none;
+  border-color: #0f766e;
 }

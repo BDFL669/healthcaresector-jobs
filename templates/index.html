@@ -14,9 +14,7 @@
     <ul class="nav-links">
       <li><a href="#">Home</a></li>
       <li><a href="#job-listing-title">Jobs</a></li>
-      <li><a href="#">Employers</a></li>
       <li><a href="#">About</a></li>
-      <li><a href="#" class="btn-nav">Post a Job</a></li>
     </ul>
   </nav>
 
@@ -36,13 +34,36 @@
       </div>
     </div>
   </section>
+  <!-- Search & Filter Section -->
+<section class="job-filters">
+  <input type="text" id="searchInput" placeholder="Search job title or company">
+
+  <select id="locationFilter">
+    <option value="">All Locations</option>
+    {% for job in jobs|unique(attribute='location') %}
+      <option value="{{ job.location }}">{{ job.location }}</option>
+    {% endfor %}
+  </select>
+
+  <select id="typeFilter">
+    <option value="">All Job Types</option>
+    {% for job in jobs|unique(attribute='job_type') %}
+      <option value="{{ job.job_type }}">{{ job.job_type }}</option>
+    {% endfor %}
+  </select>
+</section>
+
 
     <h1 id="job-listing-title">Job Listings</h1>
 
 {% if jobs and jobs|length > 0 %}
     <div class="job-cards">
         {% for job in jobs %}
-            <div class="job-card">
+            <div class="job-card"
+     data-title="{{ job.title | lower }}"
+     data-company="{{ job.company | lower }}"
+     data-location="{{ job.location }}"
+     data-type="{{ job.job_type }}">
                 <h2 class="job-title">{{ job.title }}</h2>
                 <p class="company">{{ job.company }}</p>
                 
@@ -68,6 +89,44 @@
 {% else %}
     <p>No jobs found.</p>
 {% endif %}
+
+<script>
+  const searchInput = document.getElementById("searchInput");
+  const locationFilter = document.getElementById("locationFilter");
+  const typeFilter = document.getElementById("typeFilter");
+  const jobCards = document.querySelectorAll(".job-card");
+
+  function filterJobs() {
+    const searchText = searchInput.value.toLowerCase();
+    const locationValue = locationFilter.value;
+    const typeValue = typeFilter.value;
+
+    jobCards.forEach(card => {
+      const title = card.dataset.title;
+      const company = card.dataset.company;
+      const location = card.dataset.location;
+      const type = card.dataset.type;
+
+      const matchesSearch =
+        title.includes(searchText) || company.includes(searchText);
+
+      const matchesLocation =
+        !locationValue || location === locationValue;
+
+      const matchesType =
+        !typeValue || type === typeValue;
+
+      card.style.display =
+        matchesSearch && matchesLocation && matchesType
+          ? "block"
+          : "none";
+    });
+  }
+
+  searchInput.addEventListener("input", filterJobs);
+  locationFilter.addEventListener("change", filterJobs);
+  typeFilter.addEventListener("change", filterJobs);
+</script>
 
 
 </body>
