@@ -128,9 +128,70 @@
           medical sector.
         </p>
       </div>
+      <!-- Subscribe Section -->
+<div class="subscribe-section">
+  <h3>Stay Updated</h3>
+  <p>
+    Get the latest medical job opportunities delivered straight to your inbox.
+    No spam. Only verified healthcare roles across Kenya.
+  </p>
+
+  <form class="subscribe-form" id="subscribeForm">
+    <input
+      type="email"
+      id="subscriberEmail"
+      placeholder="Enter your email address"
+      required
+    />
+    <button type="submit">Subscribe</button>
+  </form>
+
+  <p class="subscribe-message" id="subscribeMessage"></p>
+</div>
+
     </div>
   </div>
 </section>
+
+<script>
+  const form = document.getElementById("subscribeForm");
+  const emailInput = document.getElementById("subscriberEmail");
+  const message = document.getElementById("subscribeMessage");
+
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const email = emailInput.value.trim();
+    if (!email) return;
+
+    try {
+      const response = await fetch("/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ email })
+      });
+
+      const data = await response.json();
+
+      message.textContent = data.message;
+      message.className =
+        "subscribe-message " + (data.success ? "success" : "error");
+      message.style.display = "block";
+
+      if (data.success) {
+        emailInput.value = "";
+      }
+
+    } catch (err) {
+      message.textContent = "Something went wrong. Try again.";
+      message.className = "subscribe-message error";
+      message.style.display = "block";
+    }
+  });
+</script>
+
 
 <script>
   const searchInput = document.getElementById("searchInput");
