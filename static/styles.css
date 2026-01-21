@@ -34,6 +34,13 @@
   font-weight: bold;
 }
 
+.logo img {
+    height: 60px;       /* adjust as needed */
+    width: auto;
+    display: block;
+}
+
+
 .nav-links {
   list-style: none;
   display: flex;
@@ -59,10 +66,12 @@
   /*margin-top: 80px; /* same height as navbar */
   height: calc(106vh);
   background: linear-gradient(
-      rgba(15, 118, 110, 0.85),
-      rgba(15, 118, 110, 0.85)
-    ),
-    url("https://images.unsplash.com/photo-1580281657527-47c0b4b7a0a6") center/cover no-repeat;
+  to bottom right,
+  #0f766e,
+  #14b8a6,
+  #99f6e4
+);
+
   display: flex;
   align-items: center;
   padding: 0 60px;
@@ -386,4 +395,8 @@ h1 {
   .subscribe-form button {
     width: 100%;
   }
+}
+
+.job-cards {
+  margin-bottom: 30px;
 }
