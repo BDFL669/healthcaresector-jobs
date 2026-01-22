@@ -135,7 +135,7 @@
   <h3>Stay Updated</h3>
   <p>
     Get the latest medical job opportunities delivered straight to your inbox.
-    No spam. Only verified healthcare roles across Kenya.
+    No spam. You can add an optional message if you also want to reach out to the admin.
   </p>
 
   <form class="subscribe-form" id="subscribeForm">
@@ -145,25 +145,30 @@
       placeholder="Enter your email address"
       required
     />
+
+    <textarea
+      id="subscriberMessage"
+      placeholder="Message (e.g. complaint, feedback)"
+      rows="4"
+    ></textarea>
+
     <button type="submit">Subscribe</button>
   </form>
 
   <p class="subscribe-message" id="subscribeMessage"></p>
 </div>
-
-    </div>
-  </div>
-</section>
-
 <script>
   const form = document.getElementById("subscribeForm");
   const emailInput = document.getElementById("subscriberEmail");
-  const message = document.getElementById("subscribeMessage");
+  const messageInput = document.getElementById("subscriberMessage");
+  const feedback = document.getElementById("subscribeMessage");
 
   form.addEventListener("submit", async function (e) {
     e.preventDefault();
 
     const email = emailInput.value.trim();
+    const userMessage = messageInput.value.trim(); // optional
+
     if (!email) return;
 
     try {
@@ -172,27 +177,32 @@
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({ email })
+        body: JSON.stringify({
+          email: email,
+          message: userMessage || null
+        })
       });
 
       const data = await response.json();
 
-      message.textContent = data.message;
-      message.className =
+      feedback.textContent = data.message;
+      feedback.className =
         "subscribe-message " + (data.success ? "success" : "error");
-      message.style.display = "block";
+      feedback.style.display = "block";
 
       if (data.success) {
         emailInput.value = "";
+        messageInput.value = "";
       }
 
     } catch (err) {
-      message.textContent = "Something went wrong. Try again.";
-      message.className = "subscribe-message error";
-      message.style.display = "block";
+      feedback.textContent = "Something went wrong. Try again.";
+      feedback.className = "subscribe-message error";
+      feedback.style.display = "block";
     }
   });
 </script>
+
 
 
 <script>

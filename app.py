@@ -15,22 +15,34 @@ subscribers = db["subscribers"]  # NEW collection
 @app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "POST":
-        data = request.get_json()
+        data = request.get_json(force=True)
+
         email = data.get("email")
+        message = data.get("message")  # ← extract message
 
         if not email:
-            return jsonify({"success": False, "message": "Email required"}), 400
+            return jsonify({
+                "success": False,
+                "message": "Email required"
+            }), 400
 
         # prevent duplicates
         if subscribers.find_one({"email": email}):
-            return jsonify({"success": False, "message": "Already subscribed"}), 409
+            return jsonify({
+                "success": False,
+                "message": "Already subscribed"
+            }), 409
 
         subscribers.insert_one({
             "email": email,
+            "message": message,  # ← store message
             "subscribed_at": datetime.utcnow()
         })
 
-        return jsonify({"success": True, "message": "Subscribed successfully"})
+        return jsonify({
+            "success": True,
+            "message": "Subscribed successfully"
+        })
 
     jobs_list = list(jobs.find().limit(276))
     return render_template("index.html", jobs=jobs_list)
